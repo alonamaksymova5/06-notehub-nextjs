@@ -16,7 +16,7 @@ export async function fetchNotes(
   const res = await axios.get<NotesResponse>("/notes", {
     params: { page, perPage, search },
     headers: {
-      Authorization: `Bearer ${import.meta.env.VITE_NOTEHUB_TOKEN}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
     },
   });
   return res.data;
@@ -25,7 +25,7 @@ export async function fetchNotes(
 export async function createNote(newNote: NewNote): Promise<Note> {
   const res = await axios.post("/notes", newNote, {
     headers: {
-      Authorization: `Bearer ${import.meta.env.VITE_NOTEHUB_TOKEN}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
     },
   });
   return res.data;
@@ -34,7 +34,16 @@ export async function createNote(newNote: NewNote): Promise<Note> {
 export async function deleteNote(noteId: string): Promise<Note> {
   const res = await axios.delete<Note>(`/notes/${noteId}`, {
     headers: {
-      Authorization: `Bearer ${import.meta.env.VITE_NOTEHUB_TOKEN}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+    },
+  });
+  return res.data;
+}
+
+export async function fetchNoteById(noteId: string): Promise<Note> {
+  const res = await axios.get<Note>(`/notes/${noteId}`, {
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
     },
   });
   return res.data;
