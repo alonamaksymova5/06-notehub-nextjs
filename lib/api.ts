@@ -46,5 +46,6 @@ export async function fetchNoteById(noteId: string): Promise<Note> {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
     },
   });
+
   return res.data;
 }
